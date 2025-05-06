@@ -1,0 +1,11 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.DS_Store
+.idea/
+Fluke.sln.DotSettings.user
+*.db
+*.db-shm
+*.db-wal

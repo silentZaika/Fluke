@@ -1,0 +1,9 @@
+@FlukeCollectorAPI_HostAddress = http://localhost:5111
+
+GET {{FlukeCollectorAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+###
+
+POST {{FlukeCollectorAPI_HostAddress}}/api/uploadResult/
+Accept: application/json
+###
