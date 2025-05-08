@@ -3,7 +3,7 @@ using FlukeCollectorAPI.Parsers;
 
 namespace FlukeTests;
 
-public class NunitParserTests
+public class NunitXmlParserTests
 {
     [Test]
     [TestCase("")]
@@ -37,7 +37,7 @@ public class NunitParserTests
     }
 
     [Test]
-    public async Task Parse_ReturnsTestResults()
+    public async Task Parse_ReturnsPassedTestResults()
     {
         var parser = new NunitXmlTestResultParser();
 
@@ -53,6 +53,30 @@ public class NunitParserTests
             Assert.That(testResult.FailureMessage, Is.Null);
             Assert.That(testResult.StackTrace, Is.Null);
             Assert.That(testResult.Status, Is.EqualTo("Passed"));
+            Assert.That(testResult.TestRunId, Is.EqualTo(0));
+        }
+    }
+    
+    [Test]
+    public async Task Parse_ReturnsFailedTestResults()
+    {
+        var parser = new NunitXmlTestResultParser();
+
+        var rawData = await File.ReadAllTextAsync("Assets/Nunit/nunit_test_results_one_failed.xml");
+        var parsedData = parser.Parse(rawData);
+        
+        Assert.That(parsedData.TestResults, Has.Count.EqualTo(1));
+        using (Assert.EnterMultipleScope())
+        {
+            var testResult = parsedData.TestResults.First();
+            Assert.That(testResult.ClassName, Is.EqualTo("MyProject.Tests.CalculatorTests"));
+            Assert.That(testResult.Duration, Is.EqualTo(1.100d));
+            Assert.That(testResult.FailureMessage, 
+                Is.EqualTo("System.DivideByZeroException : Attempted to divide by zero."));
+            Assert.That(testResult.StackTrace, 
+                Is.EqualTo("at MyProject.Calculator.Divide(Int32 a, Int32 b) in /path/to/Calculator.cs:line 42\n" +
+                           "at MyProject.Tests.CalculatorTests.DivisionTests_ShouldThrowOnDivideByZero() in /path/to/CalculatorTests.cs:line 20"));
+            Assert.That(testResult.Status, Is.EqualTo("Failed"));
             Assert.That(testResult.TestRunId, Is.EqualTo(0));
         }
     }

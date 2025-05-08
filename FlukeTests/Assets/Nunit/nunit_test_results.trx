@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="7229be5f-78f6-4137-80f6-17d6d94fb6e2" name="SampleTestRun 2025-05-01 19:54:26" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+    <Times creation="2025-05-01T19:54:26.7289680+02:00" queuing="2025-05-01T19:54:26.7289680+02:00" start="2025-05-01T19:54:24.3363230+02:00" finish="2025-05-01T19:54:26.7493290+02:00" />
+    <TestSettings name="default" id="404915ab-bf7f-4c26-b273-53509f4eedcd">
+        <Deployment runDeploymentRoot="_SampleTestRun_2025-05-01_19_54_26" />
+    </TestSettings>
+    <Results>
+        <!-- Test that passes -->
+        <UnitTestResult executionId="e29ea8ca-6b91-4203-b46d-6dbc08b6b255" testId="d0229b0a-7d1c-f844-38c6-75a6538b6614" testName="Test_That_Passes" computerName="SampleComputer" duration="00:00:00.0933370" startTime="2025-05-01T19:54:26.4568530+02:00" endTime="2025-05-01T19:54:26.5501900+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e29ea8ca-6b91-4203-b46d-6dbc08b6b255">
+            <Output>
+                <StdOut>Test passed successfully</StdOut>
+            </Output>
+        </UnitTestResult>
+
+        <!-- Test that fails -->
+        <UnitTestResult executionId="544f5adc-8c05-468a-96c0-ec0d5f179286" testId="9c3e6819-5328-f4b5-ef6f-0ba2395467b6" testName="Test_That_Fails" computerName="SampleComputer" duration="00:00:00.0248420" startTime="2025-05-01T19:54:25.5250410+02:00" endTime="2025-05-01T19:54:25.5498830+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="544f5adc-8c05-468a-96c0-ec0d5f179286">
+            <Output>
+                <ErrorInfo>
+                    <Message>System.NullReferenceException : Object reference not set to an instance of an object.</Message>
+                    <StackTrace>   at SampleNamespace.TestClass.Test_That_Fails() in /path/to/test/ExampleTests.cs:line 35</StackTrace>
+                </ErrorInfo>
+            </Output>
+        </UnitTestResult>
+    </Results>
+    <TestDefinitions>
+        <!-- Definition for the passed test -->
+        <UnitTest name="Test_That_Passes" storage="/path/to/test/ExampleTests.dll" id="d0229b0a-7d1c-f844-38c6-75a6538b6614">
+            <Execution id="e29ea8ca-6b91-4203-b46d-6dbc08b6b255" />
+            <TestMethod codeBase="/path/to/test/ExampleTests.dll" adapterTypeName="executor://nunit3testexecutor/" className="SampleNamespace.TestClass" name="Test_That_Passes" />
+        </UnitTest>
+
+        <!-- Definition for the failed test -->
+        <UnitTest name="Test_That_Fails" storage="/path/to/test/ExampleTests.dll" id="9c3e6819-5328-f4b5-ef6f-0ba2395467b6">
+            <Execution id="544f5adc-8c05-468a-96c0-ec0d5f179286" />
+            <TestMethod codeBase="/path/to/test/ExampleTests.dll" adapterTypeName="executor://nunit3testexecutor/" className="SampleNamespace.TestClass" name="Test_That_Fails" />
+        </UnitTest>
+    </TestDefinitions>
+    <TestEntries>
+        <TestEntry testId="d0229b0a-7d1c-f844-38c6-75a6538b6614" executionId="e29ea8ca-6b91-4203-b46d-6dbc08b6b255" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+        <TestEntry testId="9c3e6819-5328-f4b5-ef6f-0ba2395467b6" executionId="544f5adc-8c05-468a-96c0-ec0d5f179286" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    </TestEntries>
+    <TestLists>
+        <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    </TestLists>
+    <ResultSummary outcome="Failed">
+        <Counters total="2" executed="2" passed="1" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+        <Output>
+            <StdOut>NUnit Adapter 5.0.0.0: Test execution started
+                Running all tests in /path/to/test/ExampleTests.dll
+                NUnit3TestExecutor discovered 2 of 2 NUnit test cases using Current Discovery mode, Non-Explicit run
+                Test passed successfully
+                System.NullReferenceException : Object reference not set to an instance of an object.
+                at SampleNamespace.TestClass.Test_That_Fails() in /path/to/test/ExampleTests.cs:line 35
+
+                NUnit Adapter 5.0.0.0: Test execution complete
+            </StdOut>
+        </Output>
+    </ResultSummary>
+</TestRun>

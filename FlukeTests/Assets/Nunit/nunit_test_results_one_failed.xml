@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-run id="2" name="MyProject.Tests.dll" testcasecount="1" result="Failed" total="1" passed="0" failed="1" inconclusive="0" skipped="0" start-time="2025-04-21 14:00:00Z" end-time="2025-04-21 14:00:03Z" duration="3.456">
+    <test-suite type="Assembly" id="0" name="MyProject.Tests.dll" fullname="/path/to/MyProject.Tests.dll" result="Failed" start-time="2025-04-21 14:00:00Z" end-time="2025-04-21 14:00:03Z" duration="3.456">
+        <test-suite type="TestSuite" id="1" name="MyProject.Tests" fullname="MyProject.Tests" result="Failed" duration="3.456">
+            <test-case id="1003" name="DivisionTests_ShouldThrowOnDivideByZero" fullname="MyProject.Tests.CalculatorTests.DivisionTests_ShouldThrowOnDivideByZero" methodname="DivisionTests_ShouldThrowOnDivideByZero" classname="MyProject.Tests.CalculatorTests" result="Failed" duration="1.100">
+                <failure>
+                    <message><![CDATA[System.DivideByZeroException : Attempted to divide by zero.]]></message>
+                    <stack-trace><![CDATA[at MyProject.Calculator.Divide(Int32 a, Int32 b) in /path/to/Calculator.cs:line 42
+at MyProject.Tests.CalculatorTests.DivisionTests_ShouldThrowOnDivideByZero() in /path/to/CalculatorTests.cs:line 20]]></stack-trace>
+                </failure>
+            </test-case>
+        </test-suite>
+    </test-suite>
+</test-run>

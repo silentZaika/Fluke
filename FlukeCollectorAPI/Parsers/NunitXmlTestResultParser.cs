@@ -31,14 +31,13 @@ public class NunitXmlTestResultParser : ITestResultParser
                 ClassName = testCase.Attribute("classname")?.Value,
                 Duration = double.Parse(testCase.Attribute("duration")?.Value, CultureInfo.InvariantCulture),
                 Status = testCase.Attribute("result")?.Value,
-                FailureMessage = testCase.Element("message")?.Element("message")?.Value,
-                StackTrace = testCase.Element("stacktrace")?.Element("stack-trace")?.Value
+                FailureMessage = testCase.Element("failure")?.Element("message")?.Value,
+                StackTrace = testCase.Element("failure")?.Element("stack-trace")?.Value
             };
             results.Add(result);
         }
 
         testRun.TestResults = results;
-        testRun.TestResults.ForEach(Console.WriteLine);
         return testRun;
     }
 }
