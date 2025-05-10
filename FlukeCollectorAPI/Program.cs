@@ -7,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ITestResultService, TestResultService>();
 builder.Services.AddScoped<ITestResultRepository, TestResultRepository>();
-builder.Services.AddScoped<ITestResultParser, NunitXmlTestResultParser>();
+builder.Services.AddTransient<NunitXmlTestResultParser>();
+builder.Services.AddTransient<NunitTrxTestResultParser>();
+builder.Services.AddScoped<IParserResolver, ParserResolver>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(

@@ -1,23 +1,17 @@
-using FlukeCollectorAPI.Parsers;
+using FlukeCollectorAPI.Model;
 
 namespace FlukeCollectorAPI.Service;
 
-public class TestResultService : ITestResultService
+public class TestResultService(
+    ITestResultRepository testResultRepository, IParserResolver resolver) : ITestResultService
 {
-    private readonly ITestResultRepository _repository;
-    private readonly ITestResultParser _parser;
-    public TestResultService(
-        ITestResultRepository testResultRepository,
-        ITestResultParser testResultParser)
-    {
-        _repository = testResultRepository;
-        _parser = testResultParser;
-    }
-    
     public async Task ProcessTestResultAsync(RawTestResult result)
     {
-        var testRun = _parser.Parse(result.RawResult);
+        var parser = resolver.Resolve(result.Format);
+        var testRun = parser.Parse(result.RawResult);
+        
+
         //TODO: Store the processed results
-        await _repository.StoreTestRunAsync(testRun);
+        await testResultRepository.StoreTestRunAsync(testRun);
     }
 }

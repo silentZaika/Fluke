@@ -1,4 +1,3 @@
-using FlukeCollectorAPI;
 using FlukeCollectorAPI.Model;
 using FlukeCollectorAPI.Parsers;
 using FlukeCollectorAPI.Service;
@@ -13,11 +12,13 @@ public class TestResultServiceTests
     {
         var repositoryMock = new Mock<ITestResultRepository>();
         var parserMock = new Mock<ITestResultParser>();
-        var service = new TestResultService(repositoryMock.Object, parserMock.Object);
+        var resolverMock = new Mock<IParserResolver>();
+        var service = new TestResultService(repositoryMock.Object, resolverMock.Object);
         
-        var rawResults = new RawTestResult("rawResult");
+        var rawResults = new RawTestResult("rawResult", "xml");
         var parsedResult = new TestRun() { TestRunName = "parsedTest" };
         parserMock.Setup(p => p.Parse("rawResult")).Returns(parsedResult);
+        resolverMock.Setup(r => r.Resolve(It.IsAny<string>())).Returns(parserMock.Object);
         
         await service.ProcessTestResultAsync(rawResults);
         

@@ -1,3 +1,5 @@
+using FlukeCollectorAPI.Model;
+
 namespace FlukeCollectorAPI.Service;
 
 public interface ITestResultService

@@ -2,7 +2,7 @@ using FlukeCollectorAPI.Model;
 
 namespace FlukeCollectorAPI.Service;
 
-public class TestResultRepository(ApplicationDbContext? context) : ITestResultRepository
+public class TestResultRepository(ApplicationDbContext context) : ITestResultRepository
 {
     // public async Task StoreTestResultAsync(Model.TestResult testResult)
     // {

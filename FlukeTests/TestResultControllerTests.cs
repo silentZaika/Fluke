@@ -1,6 +1,6 @@
 using System.Xml;
-using FlukeCollectorAPI;
 using FlukeCollectorAPI.Controllers;
+using FlukeCollectorAPI.Model;
 using FlukeCollectorAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -15,16 +15,16 @@ public class TestResultControllerTests
         var mockService = new Mock<ITestResultService>();
         var controller = new TestResultController(mockService.Object);
 
-        const string xml = "<test><result>pass</result></test>";
-
-        var result = await controller.UploadRawTestResultXmlAsync(xml) as OkObjectResult;
+        const string rawData = "<test><result>pass</result></test>"; 
+        
+        var result = await controller.UploadRawTestResultXmlAsync(rawData) as OkObjectResult;
 
         Assert.That(result!.StatusCode, Is.EqualTo(200));
         Assert.That(result!.Value!.ToString(), 
             Is.EqualTo("{ status = success }"));
     }
 
-    private static readonly string?[] EmptyXmlInputs = { string.Empty, null };
+    private static readonly string?[] EmptyXmlInputs = [string.Empty, null];
     [Test]
     [TestCaseSource(nameof(EmptyXmlInputs))]
     public async Task UploadRawTestResultXmlAsync_OnEmptyString_ReturnsBadRequest(string emptyXml)
@@ -44,7 +44,7 @@ public class TestResultControllerTests
         mockService.Setup(s => s.ProcessTestResultAsync(It.IsAny<RawTestResult>()))
             .ThrowsAsync(new XmlException());
         var controller = new TestResultController(mockService.Object);
-
+        
         var result = await controller.UploadRawTestResultXmlAsync("<test><result>fail") as BadRequestObjectResult;
         
         using (Assert.EnterMultipleScope())
