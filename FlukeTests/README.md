@@ -2,11 +2,7 @@ Run with coverage
 ```
 dotnet test --collect:"XPlat Code Coverage"
 
-dotnet test \
-/p:CollectCoverage=true \
-/p:CoverletOutput=./TestResults/coverage/ \
-/p:CoverletOutputFormat=cobertura \
-/p:ExcludeByFile="**/Migrations/*.cs"
+dotnet test /p:CollectCoverage=true /p:CoverletOutput=./TestResults/coverage/ /p:CoverletOutputFormat=cobertura /p:ExcludeByFile="**/Migrations/*.cs"
 ```
 
 Generate HTML report
