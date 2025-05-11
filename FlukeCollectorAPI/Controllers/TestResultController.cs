@@ -26,29 +26,9 @@ public class TestResultController : ControllerBase
         return Ok(new { status = "success", contentType });
     }
     
-    [HttpPost("uploadXmlResult")]
-    [Consumes(MediaTypeNames.Text.Plain)]
-    public async Task<IActionResult> UploadRawTestResultXmlAsync([FromBody] string? rawData)
-    {
-        if (string.IsNullOrEmpty(rawData)) 
-            return BadRequest("Test results are missing!");
-        
-        var rawTestResult = new RawTestResult(rawData, "xml");
-        try
-        {
-            await _testResultService.ProcessTestResultAsync(rawTestResult);
-        }
-        catch (Exception e)
-        {
-            return BadRequest($"Error processing test results: {e.Message}" ); 
-        }
-        
-        return Ok(new { status = "success" });
-    }
-    
     [HttpPost("upload/{format}")]
     [Consumes(MediaTypeNames.Text.Plain)]
-    public async Task<IActionResult> UploadRawTestResultTrxAsync(string format, [FromBody] string? rawData)
+    public async Task<IActionResult> UploadRawTestResultAsync(string format, [FromBody] string? rawData)
     {
         if (string.IsNullOrEmpty(rawData)) 
             return BadRequest("Test results are missing!");
