@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlukeCollectorAPI", "FlukeCollectorAPI\FlukeCollectorAPI.csproj", "{A409BB7C-27EB-4228-9879-FDBBAC9DB776}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluke.CollectorAPI", "Fluke.CollectorAPI\Fluke.CollectorAPI.csproj", "{A409BB7C-27EB-4228-9879-FDBBAC9DB776}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlukeTests", "FlukeTests\FlukeTests.csproj", "{2A107EBD-6EE8-4439-9953-0BFC23E74D8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluke.Tests", "Fluke.Tests\Fluke.Tests.csproj", "{2A107EBD-6EE8-4439-9953-0BFC23E74D8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluke.Core", "Fluke.Core\Fluke.Core.csproj", "{4369AE66-07B8-4479-AD32-FC2573A05091}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{2A107EBD-6EE8-4439-9953-0BFC23E74D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A107EBD-6EE8-4439-9953-0BFC23E74D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A107EBD-6EE8-4439-9953-0BFC23E74D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4369AE66-07B8-4479-AD32-FC2573A05091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4369AE66-07B8-4479-AD32-FC2573A05091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4369AE66-07B8-4479-AD32-FC2573A05091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4369AE66-07B8-4479-AD32-FC2573A05091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
