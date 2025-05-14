@@ -9,3 +9,9 @@ Generate HTML report
 ```
 reportgenerator -reports:"**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
 ```
+
+Re-create test database
+```
+dotnet ef migrations add InitialCreate --project Fluke.Core --startup-project Fluke.CollectorAPI
+dotnet ef database update --project Fluke.Core --startup-project Fluke.CollectorAPI
+```

@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FlukeCollectorAPI.Migrations
+namespace Fluke.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250502220007_RemoveExecutionTimeStampFromTestResult")]
-    partial class RemoveExecutionTimeStampFromTestResult
+    [Migration("20250514203818_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace FlukeCollectorAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
 
-            modelBuilder.Entity("Fluke.CollectorAPI.Model.TestResult", b =>
+            modelBuilder.Entity("Fluke.Core.Model.TestResult", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace FlukeCollectorAPI.Migrations
                     b.ToTable("TestResults");
                 });
 
-            modelBuilder.Entity("Fluke.CollectorAPI.Model.TestRun", b =>
+            modelBuilder.Entity("Fluke.Core.Model.TestRun", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,16 +87,16 @@ namespace FlukeCollectorAPI.Migrations
                     b.ToTable("TestRuns");
                 });
 
-            modelBuilder.Entity("Fluke.CollectorAPI.Model.TestResult", b =>
+            modelBuilder.Entity("Fluke.Core.Model.TestResult", b =>
                 {
-                    b.HasOne("Fluke.CollectorAPI.Model.TestRun", null)
+                    b.HasOne("Fluke.Core.Model.TestRun", null)
                         .WithMany("TestResults")
                         .HasForeignKey("TestRunId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Fluke.CollectorAPI.Model.TestRun", b =>
+            modelBuilder.Entity("Fluke.Core.Model.TestRun", b =>
                 {
                     b.Navigation("TestResults");
                 });

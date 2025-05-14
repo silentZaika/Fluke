@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluke.Tests", "Fluke.Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluke.Core", "Fluke.Core\Fluke.Core.csproj", "{4369AE66-07B8-4479-AD32-FC2573A05091}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluke.Core.Analytics", "Fluke.Core.Analytics\Fluke.Core.Analytics.csproj", "{25CCFD79-4235-4150-9816-769DC2E36B60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4369AE66-07B8-4479-AD32-FC2573A05091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4369AE66-07B8-4479-AD32-FC2573A05091}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4369AE66-07B8-4479-AD32-FC2573A05091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25CCFD79-4235-4150-9816-769DC2E36B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25CCFD79-4235-4150-9816-769DC2E36B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25CCFD79-4235-4150-9816-769DC2E36B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25CCFD79-4235-4150-9816-769DC2E36B60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

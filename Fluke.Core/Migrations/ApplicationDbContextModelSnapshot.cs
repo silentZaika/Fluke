@@ -3,24 +3,21 @@ using System;
 using Fluke.Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FlukeCollectorAPI.Migrations
+namespace Fluke.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250425205155_InitialCreate")]
-    partial class InitialCreate
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
 
-            modelBuilder.Entity("Fluke.CollectorAPI.TestResult", b =>
+            modelBuilder.Entity("Fluke.Core.Model.TestResult", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,15 +30,10 @@ namespace FlukeCollectorAPI.Migrations
                     b.Property<double>("Duration")
                         .HasColumnType("REAL");
 
-                    b.Property<DateTime>("ExecutionTimeStamp")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FailureMessage")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StackTrace")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Status")
@@ -57,10 +49,12 @@ namespace FlukeCollectorAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TestRunId");
+
                     b.ToTable("TestResults");
                 });
 
-            modelBuilder.Entity("Fluke.CollectorAPI.TestRun", b =>
+            modelBuilder.Entity("Fluke.Core.Model.TestRun", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,6 +82,20 @@ namespace FlukeCollectorAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TestRuns");
+                });
+
+            modelBuilder.Entity("Fluke.Core.Model.TestResult", b =>
+                {
+                    b.HasOne("Fluke.Core.Model.TestRun", null)
+                        .WithMany("TestResults")
+                        .HasForeignKey("TestRunId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Fluke.Core.Model.TestRun", b =>
+                {
+                    b.Navigation("TestResults");
                 });
 #pragma warning restore 612, 618
         }
