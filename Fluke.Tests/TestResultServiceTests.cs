@@ -15,7 +15,7 @@ public class TestResultServiceTests
         var resolverMock = new Mock<IParserResolver>();
         var service = new TestResultService(repositoryMock.Object, resolverMock.Object);
         
-        var rawResults = new RawTestResult("rawResult", "xml");
+        var rawResults = new RawTestResult("rawResult", "xml", "commit");
         var parsedResult = new TestRun() { TestRunName = "parsedTest" };
         parserMock.Setup(p => p.Parse("rawResult")).Returns(parsedResult);
         resolverMock.Setup(r => r.Resolve(It.IsAny<string>())).Returns(parserMock.Object);

@@ -3,7 +3,7 @@ using Fluke.Core.Model;
 using Fluke.Core.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FlukeCollectorAPI.Controllers;
+namespace Fluke.CollectorAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -15,34 +15,34 @@ public class TestResultController : ControllerBase
     {
         _testResultService = testResultService;
     }
-    
+
     [HttpPost("uploadJsonResult")]
     [Consumes("application/json")]
-    public async Task<IActionResult> UploadTestResultJsonAsync([FromBody]object rawData)
+    public async Task<IActionResult> UploadTestResultJsonAsync([FromBody] object rawData)
     {
         var contentType = Request.ContentType;
         var jsonData = rawData.ToString();
         Console.WriteLine(jsonData);
         return Ok(new { status = "success", contentType });
     }
-    
-    [HttpPost("upload/{format}")]
-    [Consumes(MediaTypeNames.Text.Plain)]
-    public async Task<IActionResult> UploadRawTestResultAsync(string format, [FromBody] string? rawData)
+
+    [HttpPost("upload")]
+    [Consumes(MediaTypeNames.Application.Json)]
+    public async Task<IActionResult> UploadRawTestResultAsync([FromBody] RawTestResult request)
     {
-        if (string.IsNullOrEmpty(rawData)) 
+        if (string.IsNullOrEmpty(request.RawTestData))
             return BadRequest("Test results are missing!");
-        
-        var rawTestResult = new RawTestResult(rawData, format);
+
+        var rawTestResult = new RawTestResult(request.RawTestData, request.Format, request.Commit);
         try
         {
             await _testResultService.ProcessTestResultAsync(rawTestResult);
         }
         catch (Exception e)
         {
-            return BadRequest($"Error processing test results: {e.Message}" ); 
+            return BadRequest($"Error processing test results: {e.Message}");
         }
-        
+
         return Ok(new { status = "success" });
     }
 }

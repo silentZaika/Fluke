@@ -10,11 +10,12 @@ public class PlainTextFormatter : TextInputFormatter
     public PlainTextFormatter()
     {
         SupportedMediaTypes.Add(new MediaTypeHeaderValue(MediaTypeNames.Text.Plain));
-        
+
         SupportedEncodings.Add(Encoding.UTF8);
     }
-    
-    public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+
+    public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context,
+        Encoding encoding)
     {
         using var reader = new StreamReader(context.HttpContext.Request.Body, encoding);
         var plainText = await reader.ReadToEndAsync();

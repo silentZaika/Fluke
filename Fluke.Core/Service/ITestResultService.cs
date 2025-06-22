@@ -4,5 +4,5 @@ namespace Fluke.Core.Service;
 
 public interface ITestResultService
 {
-    Task ProcessTestResultAsync(RawTestResult result);
+    Task ProcessTestResultAsync(RawTestResult rawTestData);
 }

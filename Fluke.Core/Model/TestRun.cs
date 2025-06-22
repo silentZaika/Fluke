@@ -15,5 +15,6 @@ public class TestRun
     public DateTime StarTime { get; set; }
     public double Duration { get; set; }
     
+    public string CommitHash { get; set; }
     public List<TestResult> TestResults { get; set; }
 }

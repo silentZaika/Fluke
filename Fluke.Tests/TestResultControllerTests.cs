@@ -1,7 +1,7 @@
 using System.Xml;
 using Fluke.Core.Model;
 using Fluke.Core.Service;
-using FlukeCollectorAPI.Controllers;
+using Fluke.CollectorAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -15,9 +15,10 @@ public class TestResultControllerTests
         var mockService = new Mock<ITestResultService>();
         var controller = new TestResultController(mockService.Object);
 
-        const string rawData = "<test><result>pass</result></test>"; 
+        const string rawData = "<test><result>pass</result></test>";
+        var requestData = new RawTestResult(rawData, "xml", "commit");
         
-        var result = await controller.UploadRawTestResultAsync("xml", rawData) as OkObjectResult;
+        var result = await controller.UploadRawTestResultAsync(requestData) as OkObjectResult;
 
         Assert.That(result!.StatusCode, Is.EqualTo(200));
         Assert.That(result!.Value!.ToString(), 
@@ -31,8 +32,9 @@ public class TestResultControllerTests
     {
         var mockService = new Mock<ITestResultService>();
         var controller = new TestResultController(mockService.Object);
-
-        var result = await controller.UploadRawTestResultAsync("xml",emptyXml) as BadRequestObjectResult;
+        var requestData = new RawTestResult(emptyXml, "xml", "commit");
+        
+        var result = await controller.UploadRawTestResultAsync(requestData) as BadRequestObjectResult;
 
         Assert.That(result!.Value, Is.EqualTo("Test results are missing!"));
     }
@@ -44,8 +46,9 @@ public class TestResultControllerTests
         mockService.Setup(s => s.ProcessTestResultAsync(It.IsAny<RawTestResult>()))
             .ThrowsAsync(new XmlException());
         var controller = new TestResultController(mockService.Object);
+        var requestData = new RawTestResult("<test><result>fail", "xml", "commit");
         
-        var result = await controller.UploadRawTestResultAsync("xml","<test><result>fail") as BadRequestObjectResult;
+        var result = await controller.UploadRawTestResultAsync(requestData) as BadRequestObjectResult;
         
         using (Assert.EnterMultipleScope())
         {
@@ -63,13 +66,16 @@ public class TestResultControllerTests
         var controller = new TestResultController(mockService.Object);
 
         const string rawData = "some raw test result data";
+        const string commitHash = "someCommit";
+        var requestData = new RawTestResult(rawData, format, commitHash);
 
-        var result = await controller.UploadRawTestResultAsync(format, rawData) as OkObjectResult;
+        var result = await controller.UploadRawTestResultAsync(requestData) as OkObjectResult;
 
         mockService.Verify(v => v.ProcessTestResultAsync(
             It.Is<RawTestResult>(r =>
                 r.Format == format &&
-                r.RawResult == rawData)), Times.Once);
+                r.RawTestData == rawData && 
+                r.Commit == commitHash)), Times.Once);
 
         Assert.That(result, Is.Not.Null);
         Assert.That(result.StatusCode, Is.EqualTo(200));

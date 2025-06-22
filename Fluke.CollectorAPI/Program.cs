@@ -13,13 +13,13 @@ builder.Services.AddScoped<IParserResolver, ParserResolver>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(
-            builder.Configuration.GetConnectionString("DefaultConnection"))
-    );
+        builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 
 builder.Services.AddControllers(options =>
-        options.InputFormatters.Insert(0, new PlainTextFormatter())
-    );
+    options.InputFormatters.Insert(0, new PlainTextFormatter())
+);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

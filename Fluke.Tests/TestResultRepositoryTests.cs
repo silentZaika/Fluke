@@ -31,7 +31,7 @@ public class TestResultRepositoryTests
     public async Task StoreTestRunAsync_AddsTestResult()
     {
         var testResult = new TestResult {ClassName = "test", Duration = 777f, Status = "passed", TestName = "testname"};
-        var testRun = new TestRun { TestRunName = "testRunName", TestResults = [testResult] }; 
+        var testRun = new TestRun { TestRunName = "testRunName", TestResults = [testResult], CommitHash = "CommitB"}; 
         
         await _repository.StoreTestRunAsync(testRun);
             
@@ -45,7 +45,7 @@ public class TestResultRepositoryTests
         var testResultA = new TestResult {ClassName = "test", Duration = 777f, Status = "passed", TestName = "testname"};
         var testResultB = new TestResult {ClassName = "test2", Duration = 77, Status = "failed", TestName = "testname2"};
         var testResultC = new TestResult {ClassName = "test3", Duration = 7, Status = "passed", TestName = "testname3"};
-        var testRun = new TestRun { TestRunName = "testRunName", TestResults = [testResultA, testResultB, testResultC] };
+        var testRun = new TestRun { TestRunName = "testRunName", TestResults = [testResultA, testResultB, testResultC], CommitHash = "commitA" };
 
         await _repository.StoreTestRunAsync(testRun);
             

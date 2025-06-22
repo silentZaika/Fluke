@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Fluke.Core\Fluke.Core.csproj" />
+    </ItemGroup>
+
 </Project>
