@@ -29,20 +29,20 @@ public class CliConsumerPactTests
         {
             commit = "abc123",
             format = "trx",
-            rawTestData = "<TestRun><Results><Test /></Results></TestRun>"
+            rawTestData = await File.ReadAllTextAsync("Assets/Nunit/nunit_test_results_one_passed.trx")
         };
+        var httpContent = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, MediaTypeNames.Application.Json);
         
         _pactBuilder.UponReceiving("a valid test result upload")
             .WithRequest(HttpMethod.Post, "/api/TestResult/upload")
             .WithJsonBody(payload)
             .WillRespond()
             .WithStatus(HttpStatusCode.OK);
-
+        
         await _pactBuilder.VerifyAsync(async ctx =>
         {
             var client = new HttpClient() { BaseAddress = ctx.MockServerUri };
-            var response = await client.PostAsync("/api/TestResult/upload", 
-                new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, MediaTypeNames.Application.Json));
+            var response = await client.PostAsync("/api/TestResult/upload", httpContent);
             
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         });
