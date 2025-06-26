@@ -73,6 +73,7 @@ jobs:
           fail-on-error: true
 
       - name: Generate HTML Coverage Report
+        if: always()
         run: |
           reportgenerator \
             -reports:"Fluke.Tests/TestResults/coverage/coverage.cobertura.xml" \
