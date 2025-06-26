@@ -1,0 +1,86 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Bulid and run tests
+on:
+  push:
+    branches:
+      - dev/**
+      - main
+  pull_request:
+    branches:
+      - main
+      - staging/**
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Test
+      working-directory: Fluke.Tests
+      run: |
+        dotnet test --logger:"console;verbosity=detailed" \
+                    --logger "trx;LogFileName=test-results.trx" \
+                    /p:CollectCoverage=true \
+                    /p:CoverletOutput=./TestResults/coverage/ \
+                    /p:CoverletOutputFormat=cobertura \
+                    /p:ExcludeByFile="**/Migrations/*.cs"
+      
+    - name: Get test guid dir name
+      run: echo "RESULT_DIR=$(find /Fluke.Tests/TestResults/coverage/ -name "coverage.cobertura.xml" -maxdepth 2 | xargs dirname | xargs basename)" >> $GITHUB_OUTPUT                           
+      id: test-result
+
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-report
+        path: "./Fluke.Tests/TestResults/test-results.trx"
+
+  prepare-test-report:
+    if: always()
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: test-report
+
+      - name: Install ReportGenerator
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+        
+      - name: Prepare Test Report
+        uses: dorny/test-reporter@v2
+        if: always()
+        with:
+          name: Test Report
+          path: "**/test-results.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
+
+      - name: Generate HTML Coverage Report
+        run: |
+          reportgenerator \
+            -reports:"Fluke.Tests/TestResults/coverage/coverage.cobertura.xml" \
+            -targetdir:"coverage-report" \
+            -reporttypes:Html
+
+      - name: Upload coverage HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage-report
