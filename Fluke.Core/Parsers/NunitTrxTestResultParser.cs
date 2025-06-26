@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Xml.Linq;
 using Fluke.Core.Model;
 
@@ -14,8 +15,8 @@ public class NunitTrxTestResultParser : ITestResultParser
         var counterNode = testRunNode?.Descendants(ns + "Counters").FirstOrDefault();
         var timesNode = testRunNode?.Descendants(ns + "Times").FirstOrDefault();
         
-        var start = DateTime.Parse(timesNode?.Attribute("start")?.Value);
-        var finish = DateTime.Parse(timesNode?.Attribute("finish")?.Value);
+        var start = DateTime.Parse(timesNode?.Attribute("start")?.Value, CultureInfo.InvariantCulture);
+        var finish = DateTime.Parse(timesNode?.Attribute("finish")?.Value, CultureInfo.InvariantCulture);
         var duration = Math.Round((finish - start).TotalSeconds, 3);
         var testRun = new TestRun() 
         {
