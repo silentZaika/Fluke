@@ -17,7 +17,7 @@ public class NunitXmlTestResultParser : ITestResultParser
             Total = int.Parse(testRunNode?.Attribute("total")?.Value),
             Passed = int.Parse(testRunNode?.Attribute("passed")?.Value),
             Failed = int.Parse(testRunNode?.Attribute("failed")?.Value),
-            StarTime = DateTime.Parse(testRunNode?.Attribute("start-time")?.Value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind),
+            StarTime = DateTime.Parse(testRunNode?.Attribute("start-time")?.Value).ToUniversalTime(),
             Duration = double.Parse(testRunNode?.Attribute("duration")?.Value, CultureInfo.InvariantCulture)
         };
 

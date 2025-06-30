@@ -16,8 +16,8 @@ public class NunitTrxTestResultParser : ITestResultParser
         var timesNode = testRunNode?.Descendants(ns + "Times").FirstOrDefault();
         
         
-        var start = DateTime.Parse(timesNode?.Attribute("start")?.Value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
-        var finish = DateTime.Parse(timesNode?.Attribute("finish")?.Value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+        var start = DateTime.Parse(timesNode?.Attribute("start")?.Value).ToUniversalTime();
+        var finish = DateTime.Parse(timesNode?.Attribute("finish")?.Value).ToUniversalTime();
         var duration = Math.Round((finish - start).TotalSeconds, 3);
         var testRun = new TestRun() 
         {
