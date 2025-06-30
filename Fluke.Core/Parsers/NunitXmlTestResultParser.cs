@@ -12,11 +12,12 @@ public class NunitXmlTestResultParser : ITestResultParser
         var testRunNode = doc.Element("test-run");
         var testRun = new TestRun()
         {
-            TestRunName = testRunNode?.Attribute("name")?.Value,
+            //TODO: Support multiple test-suites (aka separate Assemblies)
+            TestRunName = testRunNode?.Element("test-suite")?.Attribute("name")?.Value,
             Total = int.Parse(testRunNode?.Attribute("total")?.Value),
             Passed = int.Parse(testRunNode?.Attribute("passed")?.Value),
             Failed = int.Parse(testRunNode?.Attribute("failed")?.Value),
-            StarTime = DateTime.Parse(testRunNode?.Attribute("start-time")?.Value),
+            StarTime = DateTime.Parse(testRunNode?.Attribute("start-time")?.Value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind),
             Duration = double.Parse(testRunNode?.Attribute("duration")?.Value, CultureInfo.InvariantCulture)
         };
 

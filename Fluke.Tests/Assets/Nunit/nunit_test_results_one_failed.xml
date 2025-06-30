@@ -1,14 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-run id="2" name="MyProject.Tests.dll" testcasecount="1" result="Failed" total="1" passed="0" failed="1" inconclusive="0" skipped="0" start-time="2025-04-21 14:00:00Z" end-time="2025-04-21 14:00:03Z" duration="3.456">
-    <test-suite type="Assembly" id="0" name="MyProject.Tests.dll" fullname="/path/to/MyProject.Tests.dll" result="Failed" start-time="2025-04-21 14:00:00Z" end-time="2025-04-21 14:00:03Z" duration="3.456">
-        <test-suite type="TestSuite" id="1" name="MyProject.Tests" fullname="MyProject.Tests" result="Failed" duration="3.456">
-            <test-case id="1003" name="DivisionTests_ShouldThrowOnDivideByZero" fullname="MyProject.Tests.CalculatorTests.DivisionTests_ShouldThrowOnDivideByZero" methodname="DivisionTests_ShouldThrowOnDivideByZero" classname="MyProject.Tests.CalculatorTests" result="Failed" duration="1.100">
-                <failure>
-                    <message><![CDATA[System.DivideByZeroException : Attempted to divide by zero.]]></message>
-                    <stack-trace><![CDATA[at MyProject.Calculator.Divide(Int32 a, Int32 b) in /path/to/Calculator.cs:line 42
-at MyProject.Tests.CalculatorTests.DivisionTests_ShouldThrowOnDivideByZero() in /path/to/CalculatorTests.cs:line 20]]></stack-trace>
-                </failure>
-            </test-case>
+<test-run id="2" duration="0.065615" testcasecount="1" total="1" passed="0" failed="1" inconclusive="0" skipped="0" result="Failed" start-time="2025-06-30T21:30:32Z" end-time="2025-06-30T21:30:33Z">
+    <test-suite type="Assembly" name="Fluke.Tests.dll" fullname="/Users/elena/dev/Fluke/Fluke.Tests/bin/Debug/net9.0/Fluke.Tests.dll" total="1" passed="0" failed="1" inconclusive="0" skipped="0" result="Failed" start-time="2025-06-30T21:30:33Z" end-time="2025-06-30T21:30:33Z" duration="0.065615">
+        <test-suite type="TestSuite" name="FlukeTests" fullname="FlukeTests" total="1" passed="0" failed="1" inconclusive="0" skipped="0" result="Failed" start-time="2025-06-30T21:30:33Z" end-time="2025-06-30T21:30:33Z" duration="0.065615">
+            <test-suite type="TestFixture" name="NunitXmlParserTests" fullname="FlukeTests.NunitXmlParserTests" classname="FlukeTests.NunitXmlParserTests" total="1" passed="0" failed="1" inconclusive="0" skipped="0" result="Failed" start-time="2025-06-30T21:30:33Z" end-time="2025-06-30T21:30:33Z" duration="0.065615">
+                <test-case name="Parse_ReturnsTestRun" fullname="FlukeTests.NunitXmlParserTests.Parse_ReturnsTestRun" methodname="Parse_ReturnsTestRun" classname="NunitXmlParserTests" result="Failed" start-time="2025-06-30T21:30:33Z" end-time="2025-06-30T21:30:33Z" duration="0.065615" asserts="0" seed="1536162077">
+                    <failure>
+                        <message>  Assert.That(parsedData.StarTime, Is.EqualTo(DateTime.Parse("2025-04-21 14:00:00Z")))
+                            Expected: 2025-04-21 16:00:00
+                            But was:  2025-04-21 14:00:00
+                        </message>
+                        <stack-trace>   at FlukeTests.NunitXmlParserTests.Parse_ReturnsTestRun() in /Users/elena/dev/Fluke/Fluke.Tests/NunitXMLParserTests.cs:line 36
+                            at FlukeTests.NunitXmlParserTests.Parse_ReturnsTestRun()
+                            at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()
+                            at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)
+                            at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)
+                            at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)
+                            at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+                            at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+                            at NUnit.Framework.Internal.Execution.SimpleWorkItem.&lt;&gt;c__DisplayClass3_0.&lt;PerformWork&gt;b__0()
+                            at NUnit.Framework.Internal.ContextUtils.&lt;&gt;c__DisplayClass1_0`1.&lt;DoIsolated&gt;b__0(Object _)
+
+                            1)    at FlukeTests.NunitXmlParserTests.Parse_ReturnsTestRun() in /Users/elena/dev/Fluke/Fluke.Tests/NunitXMLParserTests.cs:line 34
+
+                        </stack-trace>
+                    </failure>
+                </test-case>
+            </test-suite>
         </test-suite>
+        <errors />
     </test-suite>
 </test-run>

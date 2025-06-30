@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="1" start-time="2025-04-21 14:00:00Z" end-time="2025-04-21 14:00:03Z" duration="0.003">
-    <test-suite type="Assembly" name="ExampleTests.dll" executed="True" result="Passed" duration="0.003">
-        <test-suite type="TestFixture" name="ExampleTests.ExampleTestClass" executed="True" result="Passed" duration="0.003">
-            <test-case name="ExampleTests.ExampleTestClass.PassingTest" classname="MyProject.Tests.CalculatorTests" executed="True" result="Passed" duration="0.001" asserts="1" />
+<test-run id="2" duration="0.01768" testcasecount="2" total="2" passed="2" failed="0" inconclusive="0" skipped="0" result="Passed" start-time="2025-06-30T21:31:52Z" end-time="2025-06-30T21:31:53Z">
+    <test-suite type="Assembly" name="Fluke.Tests.dll" fullname="/Users/elena/dev/Fluke/Fluke.Tests/bin/Debug/net9.0/Fluke.Tests.dll" total="2" passed="2" failed="0" inconclusive="0" skipped="0" result="Passed" start-time="2025-06-30T21:31:53Z" end-time="2025-06-30T21:31:53Z" duration="0.01768">
+        <test-suite type="TestSuite" name="FlukeTests" fullname="FlukeTests" total="2" passed="2" failed="0" inconclusive="0" skipped="0" result="Passed" start-time="2025-06-30T21:31:53Z" end-time="2025-06-30T21:31:53Z" duration="0.01768">
+            <test-suite type="TestFixture" name="NunitXmlParserTests" fullname="FlukeTests.NunitXmlParserTests" classname="FlukeTests.NunitXmlParserTests" total="2" passed="2" failed="0" inconclusive="0" skipped="0" result="Passed" start-time="2025-06-30T21:31:53Z" end-time="2025-06-30T21:31:53Z" duration="0.01768">
+                <test-case name="Parse_ThrowsOnInvalidRawData(&quot;&quot;)" fullname="FlukeTests.NunitXmlParserTests.Parse_ThrowsOnInvalidRawData(&quot;&quot;)" methodname="Parse_ThrowsOnInvalidRawData(&quot;&quot;)" classname="NunitXmlParserTests" result="Passed" start-time="2025-06-30T21:31:53Z" end-time="2025-06-30T21:31:53Z" duration="0.017153" asserts="0" seed="293749645" />
+                <test-case name="Parse_ThrowsOnInvalidRawData(&quot;&lt;test&gt;someData&lt;/wrong_tag&gt;&quot;)" fullname="FlukeTests.NunitXmlParserTests.Parse_ThrowsOnInvalidRawData(&quot;&lt;test&gt;someData&lt;/wrong_tag&gt;&quot;)" methodname="Parse_ThrowsOnInvalidRawData(&quot;&lt;test&gt;someData&lt;/wrong_tag&gt;&quot;)" classname="NunitXmlParserTests" result="Passed" start-time="2025-06-30T21:31:53Z" end-time="2025-06-30T21:31:53Z" duration="0.000527" asserts="0" seed="1435825673" />
+            </test-suite>
         </test-suite>
+        <errors />
     </test-suite>
 </test-run>
