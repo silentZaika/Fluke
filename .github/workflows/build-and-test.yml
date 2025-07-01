@@ -29,6 +29,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
+    - name: Start provider API
+      run: dotnet run --project Fluke.CollectorAPI/Fluke.CollectorAPI.csproj --urls https://localhost:7173 &
+    - name: Wait for API to be ready
+      run: |
+        until curl -s http://localhost:7173/health; do sleep 1; done      
+      
     - name: Test
       working-directory: Fluke.Tests
       run: |

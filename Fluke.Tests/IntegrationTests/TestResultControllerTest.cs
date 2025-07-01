@@ -37,6 +37,5 @@ public class TestResultControllerTest
             .WithFileSource(new FileInfo(pactPath))
             .WithProviderStateUrl(new Uri(_fixture.ServerUri, "/provider-states"))
             .Verify();
-        
     }
 }
