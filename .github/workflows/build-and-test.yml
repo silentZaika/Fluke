@@ -33,7 +33,7 @@ jobs:
       run: dotnet run --project Fluke.CollectorAPI/Fluke.CollectorAPI.csproj --urls https://localhost:7173 &
     - name: Check ports
       run: |
-        lsof -i :7173 || echo " No process listening
+        lsof -i :7173 || echo " No process listening "
     - name: Wait for API to be ready
       run: |
         until curl -s http://localhost:7173/health; do sleep 1; done      
