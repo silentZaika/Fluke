@@ -36,7 +36,7 @@ jobs:
         lsof -i :7173 || echo " No process listening "
     - name: Wait for API to be ready
       run: |        
-        curl -s https://localhost:7173/health
+        curl -k -v  https://localhost:7173/health
       
     - name: Test
       working-directory: Fluke.Tests
