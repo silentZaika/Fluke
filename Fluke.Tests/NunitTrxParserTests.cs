@@ -31,7 +31,7 @@ public class NunitTrxParserTests
             Assert.That(parsedData.Failed, Is.EqualTo(1));
             Assert.That(parsedData.Passed, Is.EqualTo(1));
             Assert.That(parsedData.Total, Is.EqualTo(2));
-            Assert.That(parsedData.StarTime, Is.EqualTo(DateTime.Parse("2025-05-01 19:54:24.336323").ToUniversalTime()));
+            Assert.That(parsedData.StarTime, Is.EqualTo(DateTime.Parse("2025-05-01T19:54:24.3363230+02:00").ToUniversalTime()));
             Assert.That(parsedData.TestResults, Has.Count.EqualTo(2));
         }
     }
