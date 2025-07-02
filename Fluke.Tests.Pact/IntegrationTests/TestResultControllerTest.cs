@@ -20,7 +20,7 @@ public class TestResultControllerTest
         _fixture.Dispose();
     }
 
-    [Test]
+    [Test, Category("Pact")]
     public void Controlled_Honours_Pact_WithConsumers()
     {
         var config = new PactVerifierConfig()

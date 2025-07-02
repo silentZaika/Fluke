@@ -22,14 +22,14 @@ public class CliConsumerPactTests
         _pactBuilder = pact.WithHttpInteractions();
     }
 
-    [Test]
+    [Test, Category("Pact")]
     public async Task SendValidTestResults_Returns200()
     {
         var payload = new
         {
             commit = "abc123",
             format = "trx",
-            rawTestData = await File.ReadAllTextAsync("Assets/Nunit/nunit_test_results_one_passed.trx")
+            rawTestData = await File.ReadAllTextAsync("IntegrationTests/Assets/test_results_passed.trx")
         };
         var httpContent = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, MediaTypeNames.Application.Json);
         
