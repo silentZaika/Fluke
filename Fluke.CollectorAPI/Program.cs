@@ -23,6 +23,11 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(7173);
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
