@@ -40,6 +40,7 @@ jobs:
                     /p:ExcludeByFile="**/Migrations/*.cs"
       
     - name: Get test guid dir name
+      if: always()
       run: echo "RESULT_DIR=$(find /Fluke.Tests/TestResults/coverage/ -name "coverage.cobertura.xml" -maxdepth 2 | xargs dirname | xargs basename)" >> $GITHUB_OUTPUT                           
       id: test-result
 
@@ -47,7 +48,13 @@ jobs:
       if: always()
       with:
         name: test-report
-        path: "./Fluke.Tests/TestResults/test-results.trx"
+        path: "./Fluke.Tests/TestResults/test-results.trx"        
+
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-coverage
+        path: "./Fluke.Tests/TestResults/coverage/coverage.cobertura.xml"
 
   prepare-test-report:
     if: always()
@@ -59,6 +66,9 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: test-report
+      - uses: actions/download-artifact@v4
+        with:
+          name: test-coverage
 
       - name: Install ReportGenerator
         run: dotnet tool install --global dotnet-reportgenerator-globaltool
@@ -76,7 +86,7 @@ jobs:
         if: always()
         run: |
           reportgenerator \
-            -reports:"Fluke.Tests/TestResults/coverage/coverage.cobertura.xml" \
+            -reports:"**/coverage.cobertura.xml" \
             -targetdir:"coverage-report" \
             -reporttypes:Html
 
