@@ -20,7 +20,6 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Run Pact tests
-        working-directory: Fluke
         run: |
           dotnet test --filter "TestCategory=Pact|Integration" \
                       --logger:"console;verbosity=detailed" \
