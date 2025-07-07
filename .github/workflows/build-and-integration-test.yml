@@ -1,6 +1,13 @@
 name: Build and run integration tests
 on:
   workflow_dispatch:
+  push:
+    branches:      
+      - main
+  pull_request:
+    branches:
+      - main
+      - staging/**
   
 jobs:
   build:
@@ -19,17 +26,12 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
 
-      - name: Run Pact tests
+      - name: Run integrations tests
+        working-directory: Fluke.Tests.Integration
         run: |
-          dotnet test --filter "TestCategory=Pact|Integration" \
+          dotnet test --filter "TestCategory=Integration" \
                       --logger:"console;verbosity=detailed" \
                       --logger "trx;LogFileName=test-results.trx"
- 
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: test-report-pact
-          path: "./Fluke.Tests.Pact/TestResults/test-results.trx"
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -44,9 +46,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          name: test-report-pact
       - uses: actions/download-artifact@v4
         with:
           name: test-report-integration
