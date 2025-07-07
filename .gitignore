@@ -9,3 +9,4 @@ Fluke.sln.DotSettings.user
 *.db
 *.db-shm
 *.db-wal
+**/TestResults

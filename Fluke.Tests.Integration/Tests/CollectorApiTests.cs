@@ -27,7 +27,7 @@ public class CollectorApiTests
         var response = await client.GetAsync(url);
         
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-        var content = await response.Content.ReadFromJsonAsync<string>();// .ReadAsStringAsync();
+        var content = await response.Content.ReadFromJsonAsync<string>();
         Assert.That(content, Is.EqualTo("Healthy"));
     }
 }

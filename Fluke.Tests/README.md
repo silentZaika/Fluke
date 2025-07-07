@@ -2,8 +2,7 @@ Run with coverage
 ```
 dotnet test --collect:"XPlat Code Coverage"
 dotnet test --filter TestCategory!=Pact --logger:"console;verbosity=detailed" --logger "trx;LogFileName=test-results.trx" /p:CollectCoverage=true /p:CoverletOutput=./TestResults/coverage/ /p:CoverletOutputFormat=cobertura /p:ExcludeByFile="**/Migrations/*.cs"
-
-```
+dotnet test --filter "TestCategory=Pact|Integration" --logger:"console;verbosity=detailed" --logger "trx;LogFileName=test-results.trx"
 
 Run tests to generate xml report file
 ```

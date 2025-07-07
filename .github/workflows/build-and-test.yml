@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Bulid and run tests
+name: Build and run tests
 on:
   push:
     branches:
@@ -29,7 +29,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Test
+    - name: Run unit tests
       working-directory: Fluke.Tests
       run: |
         dotnet test --logger:"console;verbosity=detailed" \
@@ -38,11 +38,6 @@ jobs:
                     /p:CoverletOutput=./TestResults/coverage/ \
                     /p:CoverletOutputFormat=cobertura \
                     /p:ExcludeByFile="**/Migrations/*.cs"
-      
-    - name: Get test guid dir name
-      if: always()
-      run: echo "RESULT_DIR=$(find /Fluke.Tests/TestResults/coverage/ -name "coverage.cobertura.xml" -maxdepth 2 | xargs dirname | xargs basename)" >> $GITHUB_OUTPUT                           
-      id: test-result
 
     - uses: actions/upload-artifact@v4
       if: always()
@@ -55,7 +50,7 @@ jobs:
       with:
         name: test-coverage
         path: "./Fluke.Tests/TestResults/coverage/coverage.cobertura.xml"
-
+  
   prepare-test-report:
     if: always()
     needs: build
